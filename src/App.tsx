@@ -211,11 +211,18 @@ const PinProtectedSection = () => {
       emoji: "🛡️"
     },
     {
+    name: "Wiam",
+    birth: "13/01/2011",
+    description: "To the only girl I ever truly loved: thank you for passing through my life. It has been torment trying to move on, trying to forget, trying to unlove. Some would call it foolish, but I still love you, still think of you, still wish you’d return—maybe not as a lover, but at least as a friend. You will never read this, never know I carved time to write it. Yet still, I love you. I miss you. And I would take you back in a heartbeat.",
+    emoji: "❤"
+    },
+    {
       name: "Mahmoud (Me)",
       birth: "19/07/2010",
       description: "Love my friends as if they were my personal and only caring family, mostly hated from girls because of my cold answers but respected from boys because of his attitude. Have two main emotions: love and hate",
       emoji: "⚔️"
-    }
+    },
+
   ];
 
   if (!isUnlocked) {
