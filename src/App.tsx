@@ -189,7 +189,7 @@ const PinProtectedSection = () => {
     {
       name: "Maryem",
       birth: "15/06/2010",
-      description: "Short, beautiful, gorgeous, kind, mature, SHORT, NO HAIR (not bald but wears hijab)",
+      description: "My short Beautiful lovely queen, she's really the best person I've ever known, I LOVE YOU MY HIJABI SISTER 🤍",
       emoji: "👑"
     },
     {
