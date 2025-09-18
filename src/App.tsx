@@ -212,7 +212,7 @@ const PinProtectedSection = () => {
     },
     {
     name: "Wiam",
-    birth: "14/01/2011",
+    birth: "13/01/2011",
     description: "To the only girl I ever truly loved: thank you for passing through my life. It has been torment trying to move on, trying to forget, trying to unlove. Some would call it foolish, but I still love you, still think of you, still wish you’d return—maybe not as a lover, but at least as a friend. You will never read this, never know I carved time to write it. Yet still, I love you. I miss you. And I would take you back in a heartbeat.",
     emoji: "❤"
     },
