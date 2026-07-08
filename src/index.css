@@ -1,207 +1,247 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+  --bg: #07070f;
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
-  font-family: 'Inter', sans-serif;
-  background: #0F0F23;
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: #e7e7f0;
+  font-family: 'Archivo', system-ui, sans-serif;
   overflow-x: hidden;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-    opacity: 1;
-  }
+/* Display font utility */
+.font-display {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
-.animate-float {
-  animation: float 20s ease-in-out infinite;
+/* ---- Selection ---- */
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Shake animation for incorrect PIN */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-  20%, 40%, 60%, 80% { transform: translateX(4px); }
-}
-
-.animate-shake {
-  animation: shake 0.6s ease-in-out;
-}
-
-/* Unlock success animation */
-@keyframes unlock-success {
-  0% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2) rotate(180deg);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.5) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-.animate-unlock-success {
-  animation: unlock-success 1.5s ease-out forwards;
-}
-
-/* Custom scrollbar */
+/* ---- Custom scrollbar ---- */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
-
 ::-webkit-scrollbar-track {
-  background: rgba(15, 15, 35, 0.5);
+  background: #07070f;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, rgba(168, 85, 247, 0.5), rgba(59, 130, 246, 0.5));
-  border-radius: 4px;
+  background: linear-gradient(#4f46e5, #2563eb);
+  border-radius: 999px;
+  border: 2px solid #07070f;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, rgba(168, 85, 247, 0.8), rgba(59, 130, 246, 0.8));
+  background: linear-gradient(#6366f1, #3b82f6);
 }
 
-/* Smooth transitions for all interactive elements */
-a, button, input, .transition-all {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Enhanced focus states */
-input:focus, button:focus {
-  outline: 2px solid rgba(168, 85, 247, 0.5);
-  outline-offset: 2px;
-}
-
-/* Enhanced hover effects */
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Gradient text animation */
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+/* ---- Reusable component classes ---- */
+@layer components {
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
   }
-  50% {
-    background-position: 100% 50%;
+
+  .glass-strong {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-2xl;
   }
-  100% {
-    background-position: 0% 50%;
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-indigo-300 via-sky-300 to-violet-400 bg-clip-text text-transparent;
+  }
+
+  .section-pad {
+    @apply px-6 py-24 sm:py-28 md:px-10;
+  }
+
+  /*
+   * Frosted glass panel — the signature surface.
+   * Real material: refractive backdrop (blur + saturation + SVG displacement),
+   * a bright light-catching top bevel, a diagonal gloss reflection streak,
+   * a chromatic rim, and a faint frosted micro-texture.
+   */
+  .glass-panel {
+    position: relative;
+    isolation: isolate;
+    /* Opaque-ish base so the card is still legible if a browser supports
+       no backdrop-filter at all (old Firefox / reduced GPU). */
+    background-color: rgba(17, 19, 38, 0.55);
+    background-image:
+      linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.16) 43%,
+        rgba(255, 255, 255, 0.04) 50%,
+        transparent 60%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.14) 0%,
+        rgba(255, 255, 255, 0.05) 34%,
+        rgba(255, 255, 255, 0.02) 62%,
+        rgba(129, 140, 248, 0.05) 100%
+      );
+    /* Cross-browser blur glass (Safari < 18 via prefix). */
+    -webkit-backdrop-filter: blur(16px) saturate(190%) brightness(1.12);
+    /* Base blur glass — Safari 18+, Firefox, Chromium. */
+    backdrop-filter: blur(16px) saturate(190%) brightness(1.12);
+    /* Chromium-only enhancement: SVG refraction. Invalid in Safari/Firefox
+       (url() unsupported here) so it is DISCARDED and the line above stands. */
+    backdrop-filter: blur(16px) saturate(190%) brightness(1.12) url(#glass-refraction);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+      inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 1px 0 rgba(255, 255, 255, 0.06),
+      inset 0 0 26px 0 rgba(180, 200, 255, 0.05),
+      0 18px 50px -14px rgba(0, 0, 0, 0.6),
+      0 4px 14px -8px rgba(99, 102, 241, 0.35);
+  }
+
+  /* Bright light-catching bevel around the whole rim (chromatic tint) */
+  .glass-panel::after,
+  .glass-frost::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.25px;
+    background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(186, 230, 253, 0.25) 18%,
+      rgba(255, 255, 255, 0.04) 42%,
+      transparent 60%,
+      rgba(196, 181, 253, 0.28) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Deeper, more saturated variant for feature cards */
+  .glass-frost {
+    position: relative;
+    isolation: isolate;
+    background-color: rgba(19, 21, 44, 0.5);
+    background-image:
+      linear-gradient(
+        120deg,
+        transparent 28%,
+        rgba(255, 255, 255, 0.18) 43%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 60%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(129, 140, 248, 0.18) 0%,
+        rgba(56, 189, 248, 0.07) 46%,
+        rgba(196, 181, 253, 0.05) 100%
+      );
+    -webkit-backdrop-filter: blur(18px) saturate(210%) brightness(1.14);
+    backdrop-filter: blur(18px) saturate(210%) brightness(1.14);
+    backdrop-filter: blur(18px) saturate(210%) brightness(1.14) url(#glass-refraction);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+      inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.45),
+      inset 0 0 30px 0 rgba(129, 140, 248, 0.08),
+      0 22px 60px -16px rgba(0, 0, 0, 0.62),
+      0 6px 18px -8px rgba(99, 102, 241, 0.4);
   }
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
+/*
+ * Cursor-tracked sheen: a soft radial highlight that follows the pointer
+ * across a glass surface. Driven by --mx / --my custom properties (%).
+ */
+.glass-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.glass-sheen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 255, 255, 0.22),
+    rgba(129, 140, 248, 0.1) 34%,
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.glass-sheen:hover::before {
+  opacity: 1;
 }
 
-/* Glass effect enhancement */
-.glass {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* keep card content above the sheen + gloss layers */
+.glass-sheen > * {
+  position: relative;
+  z-index: 4;
 }
 
-/* Enhanced animations for sections */
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Animated gradient text for the hero name */
+.animated-gradient {
+  background-image: linear-gradient(
+    110deg,
+    #a5b4fc,
+    #38bdf8,
+    #c4b5fd,
+    #818cf8,
+    #a5b4fc
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-x 6s ease infinite;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-slide-in-up {
-  animation: slideInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-/* Bounce animation enhancement */
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(-50px);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05) translateY(0);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-bounce-in {
-  animation: bounceIn 0.8s ease-out forwards;
-}
-
-/* Pulse animation for hearts */
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
+@media (prefers-reduced-motion: reduce) {
+  .animated-gradient,
+  .animate-blob,
+  .animate-marquee,
+  .animate-shimmer {
+    animation: none !important;
   }
 }
 
-.animate-heartbeat {
-  animation: heartbeat 1.5s ease-in-out infinite;
+/* Subtle noise/grain overlay helper */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

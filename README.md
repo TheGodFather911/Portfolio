@@ -1,67 +1,39 @@
-# Samurai_vxtW - Portfolio
+# Samurai_vxtW — Portfolio v2
 
-A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
+A modern, cinematic personal portfolio for **Samurai_vxtW** (Mahmoud) — Full Stack Developer, Music Producer & Beat Maker from Rabat, Morocco.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://sw-portfo.netlify.app/)
+Rebuilt with a *Modern Dark* aesthetic: glassmorphism, ambient drifting light, a pointer-tracked spotlight, animated gradient typography, scroll-reveal choreography, and a private PIN-protected "Circle" section with live birthday countdowns.
 
-![Portfolio Preview](./public/hover.png)
+## Tech Stack
 
-## About This Project
+- **React 18** + **TypeScript**
+- **Vite** — lightning-fast dev & build
+- **Tailwind CSS** — design tokens & utility styling
+- **Framer Motion** — spring physics, scroll reveals, layout animations
+- **Lucide React** — consistent SVG iconography
+- **Space Grotesk / Archivo** — display & body typography
 
-This project is a personal portfolio for Samurai_vxtW, showcasing skills as a Full Stack Developer, Music Producer, and Beat Maker. It's designed to be clean, fast, and fully responsive, providing a great user experience on any device.
+## Sections
 
-## Technologies Used
-
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-- **React:** For building the user interface.
-- **Vite:** As the next-generation frontend tooling for a blazing fast development experience.
-- **TypeScript:** For strong typing and improved code quality.
-- **Tailwind CSS:** For a utility-first CSS framework to rapidly build custom designs.
-- **Lucide-React:** For beautiful and consistent icons.
+1. **Hero** — animated avatar, typewriter roles, stat tiles
+2. **About** — bio, dual-craft cards (Development / Music), skill marquee
+3. **Connect** — interactive social cards (GitHub, Instagram, Telegram, Spotify, YouTube)
+4. **Circle** — PIN-gated loved-ones grid with per-person birthday countdowns
+5. **Footer** — quick links, socials, back-to-top
 
 ## Getting Started
 
-To get a local copy up and running, follow these simple steps.
-
-### Prerequisites
-
-Make sure you have Node.js and npm installed on your machine.
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/get-npm)
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/TheGodFather911/Portfolio.git
-   ```
-2. Navigate to the project directory
-   ```sh
-   cd Portfolio
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-### Running the Development Server
-
-To run the app in development mode, execute the following command. This will open the app at `http://localhost:5173` (or the next available port).
-
-```sh
-npm run dev
+```bash
+npm install     # install dependencies
+npm run dev     # start dev server at http://localhost:5173
+npm run build   # type-check + production build to dist/
+npm run preview # preview the production build
 ```
 
-## Available Scripts
+## Design System
 
-In the project directory, you can run:
+Colors, motion and typography follow a *Modern Dark (Cinematic)* system — deep indigo/blue/violet on near-black `#07070F`, `expo.out` easing, and `prefers-reduced-motion` support throughout.
 
-- `npm run dev`: Runs the app in the development mode.
-- `npm run build`: Builds the app for production to the `dist` folder.
-- `npm run lint`: Lints the codebase using ESLint.
-- `npm run preview`: Serves the production build locally for previewing.
+---
 
+© 2026 Samurai_vxtW. Crafted with passion & precision. Made in Morocco.
